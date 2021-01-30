@@ -1,0 +1,65 @@
+
+<!-- IN HEAD -->
+<!-- Video Player CSS -->
+<link rel="stylesheet" href="video-player-0.1.css">
+
+
+<!-- IN BODY -->
+<!-- Video Player Script -->
+<script src="video-player-0.1.min.js"></script>
+
+<div class="video-player" id="video-player" width="400px">
+  <div class="vp-wrapper">
+    <video src="D:\source\asp_test\videos\sample.mp4">
+      Элемент VIDEO не поддерживается браузеров. Обновить браузер.
+    </video>
+    <div class="vp-bottom">
+      <div class="vp-bottom-wrap">
+        <div class="vp-progress-contrainer">
+        </div>
+        <div class="vp-control-panel">
+          <div class="vp-control-panel-left">
+            <button id="vp-ctl-play-pause" title="Смотреть (K)">
+              <svg viewBox="0 0 36 36">
+                <path d="M 12,26 18.5,22 18.5,14 12,10 z M 18.5,22 25,18 25,18 18.5,14 z"/>
+              </svg>
+            </button>
+            <button id="vp-ctl-sound" title="Отключение звука (M)">
+              <svg viewBox="0 0 36 36">
+                <path d="M8,21 L12,21 L17,26 L17,10 L12,15 L8,15 L8,21 Z M19,14 L19,22 C20.48,21.32 21.5,19.77 21.5,18 C21.5,16.26 20.48,14.74 19,14 ZM19,11.29 C21.89,12.15 24,14.83 24,18 C24,21.17 21.89,23.85 19,24.71 L19,26.77 C23.01,25.86 26,22.28 26,18 C26,13.72 23.01,10.14 19,9.23 L19,11.29 Z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="vp-control-panel-right">
+            <button id="vp-ctl-slower" title="Уменьшить скорость воспроизведения (J)">
+              <svg viewBox="0 0 36 36">
+                <path d="M 28.5,26 15.5,18 28.5,10 z M 18.5,26 5.5,18 18.5,10 z"/>
+              </svg>
+            </button>
+            <button id="vp-ctl-speed-indicator" title="Текущая скорость воспроизведения">
+              <span id="vp-ctl-speed-indicator-content">1x</span>
+            </button>
+            <button id="vp-ctl-faster" title="Увеличить скорость воспроизведения (L)">
+              <svg viewBox="0 0 36 36">
+                <path d="M 7.5,26 20.5,18 7.5,10 z M 17.5,26 30.5,18 17.5,10 z"/>
+              </svg>
+            </button>
+            <button id="vp-ctl-pip" title="Открыть мини проигрователь (I)">
+              <svg viewBox="0 0 36 36">
+                <path d="M25,17 L17,17 L17,23 L25,23 L25,17 L25,17 z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 z"/>
+              </svg>
+            </button>
+            <button id="vp-ctl-fullsrc" title="Во весь экран (F)">
+              <svg viewBox="0 0 36 36">
+                <path d="m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z"/>
+                <path d="m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z"/>
+                <path d="m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z"/>
+                <path d="M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

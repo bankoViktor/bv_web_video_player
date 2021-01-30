@@ -1,0 +1,104 @@
+
+body {
+  margin: 300px 200px;
+}
+
+.video-player {
+  background-color: black; 
+  position: relative;
+  margin-bottom: -5px; 
+  width: 100%;
+  height: 400px;
+}
+
+.video-player video {
+  width: 100%;
+}
+
+.vp-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  /*background-color: rgba(255,255,255,0.5);*/
+}
+
+.vp-bottom-wrap {
+  margin: 0 8px;
+  /*background-color: rgba(255,0,255,0.5);*/
+}
+
+.vp-progress-contrainer {
+  height: 5px;
+  background-color: orange;
+}
+
+.vp-control-panel {
+  background-color: rgba(0,0,0,0.2);
+  font-size: 0; /* убирает зазоры между кнопками */
+
+}
+
+.vp-control-panel-left {
+   /*background-color: rgba(255,0,255,0.5);*/
+   float: left;
+}
+
+.vp-control-panel-right {
+   /*background-color: rgba(0,255,255,0.5);*/
+   float: right;
+}
+
+/* Buttons */
+
+.video-player button {
+  height: 36px;
+  width: 36px;
+  background-color: transparent;
+  border: 2px solid transparent;
+  cursor: pointer;
+  padding: 0;
+  outline: none;
+  vertical-align: middle;
+}
+.video-player button path { 
+  fill: white; 
+}
+.video-player button:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+.video-player button:active {
+  background-color: rgba(255,255,255,0.2);
+  border-color: white;
+}
+.video-player button:focus {
+  border-color: red;
+}
+.video-player button:active:focus {
+  border-color: transparent;
+}
+.video-player button:disabled path {
+  fill: rgba(255,255,255,0.3); 
+}
+.video-player button:disabled:hover {
+  background-color: transparent;
+}
+#vp-ctl-speed-indicator {
+  width: 60px;
+}
+#vp-ctl-speed-indicator-content {
+  color: white;
+  font-size: 18px;
+  font-weight: bolder;
+}
+
+/* Time Code */
+timecode {
+  color: blue;
+  font-family: Courier New;
+  font-size: 1.2em;
+  font-weight: bolder;
+  background-color: #aeaeaeae;
+  padding: 2px 5px;
+  cursor: pointer;
+}
