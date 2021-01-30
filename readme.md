@@ -72,16 +72,16 @@ Banko Viktor - [bankoViktor](https://github.com/bankoViktor) - bankviktor14@gmai
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/bankoViktor/repo.svg?style=for-the-badge
-[contributors-url]: https://github.com/bankoViktor/repo/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/bankoViktor/repo.svg?style=for-the-badge
-[forks-url]: https://github.com/bankoViktor/repo/network/members
-[stars-shield]: https://img.shields.io/github/stars/bankoViktor/repo.svg?style=for-the-badge
-[stars-url]: https://github.com/bankoViktor/repo/stargazers
-[issues-shield]: https://img.shields.io/github/issues/bankoViktor/repo.svg?style=for-the-badge
-[issues-url]: https://github.com/bankoViktor/repo/issues
-[license-shield]: https://img.shields.io/github/license/bankoViktor/repo.svg?style=for-the-badge
-[license-url]: https://github.com/bankoViktor/repo/blob/master/LICENSE.txt
+[contributors-shield]: https://img.shields.io/github/contributors/bankoViktor/bv_web_video_player.svg?style=for-the-badge
+[contributors-url]: https://github.com/bankoViktor/bv_web_video_player/graphs/contributors
+[forks-shield]: https://img.shields.io/github/forks/bankoViktor/bv_web_video_player.svg?style=for-the-badge
+[forks-url]: https://github.com/bankoViktor/bv_web_video_player/network/members
+[stars-shield]: https://img.shields.io/github/stars/bankoViktor/bv_web_video_player.svg?style=for-the-badge
+[stars-url]: https://github.com/bankoViktor/bv_web_video_player/stargazers
+[issues-shield]: https://img.shields.io/github/issues/bankoViktor/bv_web_video_player.svg?style=for-the-badge
+[issues-url]: https://github.com/bankoViktor/bv_web_video_player/issues
+[license-shield]: https://img.shields.io/github/license/bankoViktor/bv_web_video_player.svg?style=for-the-badge
+[license-url]: https://github.com/bankoViktor/bv_web_video_player/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/bankoViktor
 [product-screenshot]: images/screenshot.png
