@@ -1,8 +1,13 @@
 
 :root {
-  --button_size: 40px;
-  --volume_width: 70px;
-  --volume_thumb: 12px;
+  --bv_button_size: 40px;
+  --bv_volume_width: 70px;
+  --bv_volume_thumb: 12px;
+  --bv_controls_color: rgba(255, 255, 255, 0.9);
+  --bv_progress_color: rgba(255, 255, 255, 0.3);
+  --bv_progress_buffered_color: rgba(255, 255, 255, 0.3);
+  --bv_progress_cursor_color: rgba(255, 255, 255, 0.4);
+  --bv_progress_time_color: red;
 }
 
 /* VIDEO PLAYER */
@@ -54,7 +59,7 @@
 
 .bv-progress-bar-track {
   position: relative;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--bv_progress_color);
   height: 50%;
   transform: translateY(+50%);
 }
@@ -68,13 +73,13 @@
 .bv-progress-bar-pos {
   position: absolute;
   height: 100%;
-  background-color: red;
+  background-color: var(--bv_progress_time_color);
 }
 
 .bv-progress-bar-cursor {
   position: absolute;
   height: 100%;
-  background-color: rgba(255, 255, 255, 0.4);
+  background-color: var(--bv_progress_cursor_color);
   width: 0%;
 }
 
@@ -100,7 +105,7 @@
 /* BUFFER SEGMENTS */
 
 .bv-buffers ul li {
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--bv_progress_buffered_color);
 }
 
 /* CONTROLS */
@@ -122,8 +127,8 @@
 /* BUTTON */
 
 .bv-controls button {
-  height: var(--button_size);
-  width: var(--button_size);
+  height: var(--bv_button_size);
+  width: var(--bv_button_size);
   background-color: transparent;
   border: 0px solid transparent;
   cursor: pointer;
@@ -133,7 +138,7 @@
 }
 
 .bv-controls button path {
-  fill: white;
+  fill: var(--bv_controls_color);
 }
 
 .bv-controls button:hover {
@@ -169,8 +174,8 @@
 
 .bv-volume-container {
   display: inline-block;
-  width: var(--button_size);
-  height: var(--button_size);
+  width: var(--bv_button_size);
+  height: var(--bv_button_size);
   transition: width 0.4s;
   white-space: nowrap;
   overflow: hidden;
@@ -178,13 +183,13 @@
 }
 
 .bv-volume-container:hover {
-  width: calc(var(--button_size) + var(--volume_width));
+  width: calc(var(--bv_button_size) + var(--bv_volume_width));
   transition: width 0.4s;
 }
 
 .bv-volume-slider {
   display: inline-block;
-  width: var(--volume_width);
+  width: var(--bv_volume_width);
   vertical-align: middle;
   cursor: pointer;
   position: relative;
@@ -194,7 +199,7 @@
 .bv-volume-slider-wrapper {
   position: relative;
   height: 100%;
-  margin: 0 calc(var(--volume_thumb));
+  margin: 0 calc(var(--bv_volume_thumb));
 }
 
 .bv-volume-slider-track {
@@ -208,7 +213,7 @@
 }
 
 .bv-volume-slider-fill {
-  background-color: white;
+  background-color: var(--bv_controls_color);
   position: absolute;
   left: 0;
   top: 0;
@@ -221,49 +226,52 @@
   top: 50%;
   transform: translateY(-50%) translateX(50%);
   right: 0;
-  background-color: white;
-  height: var(--volume_thumb);
-  width: var(--volume_thumb);
-  border-radius: calc(var(--volume_thumb) / 2);
+  background-color: var(--bv_controls_color);
+  height: var(--bv_volume_thumb);
+  width: var(--bv_volume_thumb);
+  border-radius: calc(var(--bv_volume_thumb) / 2);
   cursor: pointer;
 }
 
 /* SPEED INDICATORS */
 
 .bv-ctl-speed-indicator {
-  width: 55px !important;
+  width: 60px !important;
 }
 
 .bv-ctl-speed-indicator-content {
-  color: white;
   font-size: 18px;
   font-weight: bolder;
+  border-radius: 4px; 
+  padding: 3px 0;
+  color: var(--bv_controls_color);
 }
 
 /* TIME INDICATORS */
 
 .bv-time-indicator {
-  color: white;
   font-size: 18px;
   font-family: "Arial";
   font-weight: 400;
   display: inline-block;
   vertical-align: middle;
+  color: var(--bv_controls_color);
 }
 
 /* SHORTKEYS WINDOW */
 
 .bv-popup {
-	position: absolute;
-	left: 50%;
-	top: 5%;
-	width: 70%;
-	height: 70%;
-	transform: translateX(-50%);
-	background-color: rgba(0, 0, 0, 0.6);
-	padding: 10px;
-	font-family: Arial;
-	z-index: 3000;
+  position: absolute;
+  left: 50%;
+  top: 5%;
+  width: 70%;
+  height: 70%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  font-family: Arial;
+  z-index: 3000;
+  color: white;
 }
 
 .bv-popup-header {
@@ -271,11 +279,9 @@
 	margin-bottom: 5px;
 	font-weight: bold;
 	font-size: 1.2rem;
-	color: white;
 }
 
 .bv-popup-body {
-	color: white;
 	font-size: 0.8rem;
 	height: 83%;
 	overflow-y: auto;
@@ -286,7 +292,7 @@
 	margin-top: 5px;
 }
 
-.bv-popup kbd{
+.bv-popup kbd {
 	display: inline-block;
 	padding: 3px 8px;
 	background-color: #2980b9;
@@ -327,15 +333,15 @@
 }
 
 .bv-timecode {
-	margin-left: 50%; /* в px задавать */
-	width: 55px;
-	background-color: rgba(0, 0, 0, 0.3);
-	color: white;
-	font-size: 1rem;
-	font-family: Arial;
-	text-align: center;
-	padding: 2px 5px;
-	position: relative;
+  margin-left: 0; /* в px */
+  width: 55px;
+  background-color: rgba(0, 0, 0, 0.3);
+  font-size: 1rem;
+  font-family: Arial;
+  text-align: center;
+  padding: 2px 5px;
+  position: relative;
+  color: var(--bv_controls_color);
 }
 
 /* DEBUG OUTPUT */
@@ -346,7 +352,6 @@
 	top: 10px;
 	width: 500px;
 	background-color: rgba(120, 0, 0, 0.4);
-	color: white;
 	font-family: 'Courier New', monospace;
 	font-size: 12px;
 	padding: 10px;
