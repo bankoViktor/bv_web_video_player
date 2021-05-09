@@ -22,10 +22,10 @@
   min-height: 100px;
 }
 
-.bv-video-player video {
-  height: 100%;
-  width: 100%;
-}
+  .bv-video-player video {
+    height: 100%;
+    width: 100%;
+  }
 
 .bv-panel-top,
 .bv-panel-bottom {
@@ -64,11 +64,11 @@
   transform: translateY(+50%);
 }
 
-.bv-progress-bar-track:hover {
-  height: 100%;
-  transform: translateY(0);
-  cursor: pointer;
-}
+  .bv-progress-bar-track:hover {
+    height: 100%;
+    transform: translateY(0);
+    cursor: pointer;
+  }
 
 .bv-progress-bar-pos {
   position: absolute;
@@ -91,16 +91,16 @@
   width: 100%;
 }
 
-.bv-segments ul {
-  list-style-type: none;
-}
+  .bv-segments ul {
+    list-style-type: none;
+  }
 
-.bv-segments ul li {
-  position: absolute;
-  top: 0;
-  height: 100%;
-  user-select: none;
-}
+    .bv-segments ul li {
+      position: absolute;
+      top: 0;
+      height: 100%;
+      user-select: none;
+    }
 
 /* BUFFER SEGMENTS */
 
@@ -137,38 +137,38 @@
   vertical-align: middle;
 }
 
-.bv-controls button path {
-  fill: var(--bv_controls_color);
-}
+  .bv-controls button path {
+    fill: var(--bv_controls_color);
+  }
 
-.bv-controls button:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
+  .bv-controls button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
 
-.bv-controls button:active {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-color: white;
-}
+  .bv-controls button:active {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: white;
+  }
 
-.bv-controls button:focus {
-  /* border-color: red; */
-}
+  .bv-controls button:focus {
+    /* border-color: red; */
+  }
 
-.bv-controls button:active:focus {
-  border-color: transparent;
-}
+  .bv-controls button:active:focus {
+    border-color: transparent;
+  }
 
-.bv-controls button:disabled path {
-  fill: rgba(255, 255, 255, 0.3);
-}
+  .bv-controls button:disabled path {
+    fill: rgba(255, 255, 255, 0.3);
+  }
 
-.bv-controls button:disabled:hover {
-  background-color: transparent;
-}
+  .bv-controls button:disabled:hover {
+    background-color: transparent;
+  }
 
-.bv-controls button:disabled:active {
-  border-color: transparent;
-}
+  .bv-controls button:disabled:active {
+    border-color: transparent;
+  }
 
 /* VOLUME CONTROLS */
 
@@ -182,10 +182,10 @@
   vertical-align: middle;
 }
 
-.bv-volume-container:hover {
-  width: calc(var(--bv_button_size) + var(--bv_volume_width));
-  transition: width 0.4s;
-}
+  .bv-volume-container:hover {
+    width: calc(var(--bv_button_size) + var(--bv_volume_width));
+    transition: width 0.4s;
+  }
 
 .bv-volume-slider {
   display: inline-block;
@@ -242,7 +242,7 @@
 .bv-ctl-speed-indicator-content {
   font-size: 18px;
   font-weight: bolder;
-  border-radius: 4px; 
+  border-radius: 4px;
   padding: 3px 0;
   color: var(--bv_controls_color);
 }
@@ -275,61 +275,61 @@
 }
 
 .bv-popup-header {
-	color: red;
-	margin-bottom: 5px;
-	font-weight: bold;
-	font-size: 1.2rem;
+  color: red;
+  margin-bottom: 5px;
+  font-weight: bold;
+  font-size: 1.2rem;
 }
 
 .bv-popup-body {
-	font-size: 0.8rem;
-	height: 83%;
-	overflow-y: auto;
+  font-size: 0.8rem;
+  height: 83%;
+  overflow-y: auto;
 }
 
 .bv-popup-footer {
-	text-align: center;
-	margin-top: 5px;
+  text-align: center;
+  margin-top: 5px;
 }
 
 .bv-popup kbd {
-	display: inline-block;
-	padding: 3px 8px;
-	background-color: #2980b9;
-	border-radius: 3px;
+  display: inline-block;
+  padding: 3px 8px;
+  background-color: #2980b9;
+  border-radius: 3px;
 }
 
 /* POPUP MENU */
 
 .bv-menu {
-	width: 250px;
-	background-color: rgba(80, 80, 80, 0.8);
-	margin: 0 0 5px auto;
-	border-radius: 3px;
+  width: 250px;
+  background-color: rgba(80, 80, 80, 0.8);
+  margin: 0 0 5px auto;
+  border-radius: 3px;
 }
 
-.bv-menu ul {
-	padding: 0;
-	margin: 0;
-	list-style: none;
-}
+  .bv-menu ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
 
-.bv-menu li {
-	height: 35px;
-}
+  .bv-menu li {
+    height: 35px;
+  }
 
-.bv-menu li:hover {
-	background-color: rgba(255, 255, 255, 0.3);
-}
+    .bv-menu li:hover {
+      background-color: rgba(255, 255, 255, 0.3);
+    }
 
-.bv-menu li:active {
-	background-color: rgba(255, 255, 255, 0.4);
-}
+    .bv-menu li:active {
+      background-color: rgba(255, 255, 255, 0.4);
+    }
 
 /* CURSOR TIME CODE */
 
 .bv-timecode-container {
-	margin-bottom: 8px;
+  margin-bottom: 8px;
 }
 
 .bv-timecode {
@@ -347,12 +347,12 @@
 /* DEBUG OUTPUT */
 
 .bv-debug-out {
-	position: absolute;
-	left: 10px;
-	top: 10px;
-	width: 500px;
-	background-color: rgba(120, 0, 0, 0.4);
-	font-family: 'Courier New', monospace;
-	font-size: 12px;
-	padding: 10px;
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 500px;
+  background-color: rgba(120, 0, 0, 0.4);
+  font-family: 'Courier New', monospace;
+  font-size: 12px;
+  padding: 10px;
 }
