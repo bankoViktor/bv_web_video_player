@@ -380,6 +380,34 @@ class bvPlayer {
             } //else console.info("key up " + event.keyCode);
         }
     }
+
+    /**
+    * Скрывает и отключает кнопки управления скорости воспроизведения.
+    */
+    hideSpeedControls() {
+        this.ctlSlower.setAttribute('disabled', '');
+        this.ctlSlower.setAttribute('hidden', '');
+
+        this.ctlSpeedIndicator.setAttribute('disabled', '');
+        this.ctlSpeedIndicator.setAttribute('hidden', '');
+
+        this.ctlFaster.setAttribute('disabled', '');
+        this.ctlFaster.setAttribute('hidden', '');
+    }
+
+    /**
+     * Показыват и включает кнопки управления скорости воспроизведения.
+     */
+    showSpeedControls() {
+        this.ctlSlower.removeAttribute('disabled');
+        this.ctlSlower.removeAttribute('hidden');
+
+        this.ctlSpeedIndicator.removeAttribute('disabled');
+        this.ctlSpeedIndicator.removeAttribute('hidden');
+
+        this.ctlFaster.removeAttribute('disabled');
+        this.ctlFaster.removeAttribute('hidden');
+    }
 } 
 
 function outClear() {
