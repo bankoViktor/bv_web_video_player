@@ -149,6 +149,7 @@ class bvPlayer {
         this.popup = this.player.querySelector(".bv-popup");
         this.ctlPopupClose = this.player.querySelector(".bv-popup-footer button");
         this.timeCode = this.player.querySelector(".bv-timecode");
+        this.volumeHint = this.player.querySelector(".bv-volume");
 
         // Player root
         this.player.onfullscreenchange = event => {
@@ -182,6 +183,17 @@ class bvPlayer {
             }
 
             this.volumeFill.style.width = this.video.volume * 100 + '%';
+
+            this.volumeHint.innerText = Math.round(this.video.volume * 100) + '%'
+
+            this.volumeHint.style.opacity = 1;
+            if (this.volumeHintTimerId > 0) {
+                clearTimeout(this.volumeHintTimerId);
+                this.volumeHintTimerId == 0;
+            }
+            this.volumeHintTimerId = setTimeout(() => {
+                this.volumeHint.style.opacity = 0;
+            }, 1000);
         }
         if (this.video.muted) {
             bvPlayer._changeButtonState(this.ctlMute, "Отключение звука (М)", svg_sound_mute);
@@ -370,8 +382,14 @@ class bvPlayer {
                 }
             } else if (event.keyCode == KeyEvent.DOM_VK_UP) {
                 this.video.volume = Math.min(Math.floor(this.video.volume * 100) / 100 + this.volumeStep, 1);
+                if (this.video.muted) {
+                    this.video.muted = false;
+                }
             } else if (event.keyCode == KeyEvent.DOM_VK_DOWN) {
                 this.video.volume = Math.max(Math.floor(this.video.volume * 100) / 100 - this.volumeStep, 0);
+                if (this.video.muted) {
+                    this.video.muted = false;
+                }
             } else if (event.keyCode >= KeyEvent.DOM_VK_0 && event.keyCode <= KeyEvent.DOM_VK_9 ||
                 event.keyCode >= KeyEvent.DOM_VK_NUMPAD0 && event.keyCode <= KeyEvent.DOM_VK_NUMPAD9) {
                 const base = event.keyCode < 96 ? 48 : 96;

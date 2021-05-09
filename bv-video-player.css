@@ -4,7 +4,7 @@
   --bv_volume_width: 70px;
   --bv_volume_thumb: 12px;
   --bv_controls_color: rgba(255, 255, 255, 0.9);
-  --bv_progress_color: rgba(255, 255, 255, 0.3);
+  --bv_progress_color: rgba(255, 255, 255, 0.2);
   --bv_progress_buffered_color: rgba(255, 255, 255, 0.3);
   --bv_progress_cursor_color: rgba(255, 255, 255, 0.4);
   --bv_progress_time_color: red;
@@ -20,6 +20,7 @@
   user-select: none;
   min-width: 500px;
   min-height: 100px;
+  font-family: Arial;
 }
 
   .bv-video-player video {
@@ -251,7 +252,6 @@
 
 .bv-time-indicator {
   font-size: 18px;
-  font-family: "Arial";
   font-weight: 400;
   display: inline-block;
   vertical-align: middle;
@@ -269,7 +269,6 @@
   transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0.6);
   padding: 10px;
-  font-family: Arial;
   z-index: 3000;
   color: white;
 }
@@ -337,11 +336,26 @@
   width: 55px;
   background-color: rgba(0, 0, 0, 0.3);
   font-size: 1rem;
-  font-family: Arial;
   text-align: center;
   padding: 2px 5px;
   position: relative;
   color: var(--bv_controls_color);
+}
+
+/* VOLUME HINT */
+
+.bv-volume {
+  position: absolute;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 1.8rem;
+  opacity: 0;
+  transition: opacity 0.3s; /* in */
 }
 
 /* DEBUG OUTPUT */
