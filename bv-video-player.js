@@ -13,6 +13,7 @@
 // TODO высота контейнера прогресса бара (без прыжков при наведении мыши)
 // TODO иконки в html, менять hidden или visibility
 // TODO всплывающая подсказка далее/назад 5сек, плей/стоп
+// TODO ffmpeg Создание нескольких выходов https://trac.ffmpeg.org/wiki/Creating%20multiple%20outputs
 
 /**
  * Горячие клавишы:
@@ -154,6 +155,7 @@ class bvPlayer {
         this.ctlPopupClose = this.player.querySelector(".bv-popup-footer button");
         this.timeCode = this.player.querySelector(".bv-timecode");
         this.hint = this.player.querySelector(".bv-hint");
+        this.popupQuality = this.player.querySelector(".bv-menu");
 
         // Player root
         this.player.onfullscreenchange = event => {
@@ -166,6 +168,21 @@ class bvPlayer {
         this.player.ondblclick = event => {
             if (event.target === this.video) {
                 this.ctlFullSrc.click();
+            }
+        }
+        this.player.onclick = event => {
+            let isClosing = true;
+
+            for (let i = 0; i < event.path.length; i++) {
+                if (event.path[i] === this.ctlQuality) {
+                    isClosing = false;
+                    break;
+                }
+            }
+
+            if (isClosing) {
+                this.popupQuality.style.visibility = 'collapse';
+                this.popupQuality.style.opacity = 0;
             }
         }
 
@@ -212,7 +229,11 @@ class bvPlayer {
             bvPlayer._changeButtonState(this.ctlPip, "Открыть мини проигрыватель (I)", svg_pip_enter);
         }
         this.video.onclick = event => {
-            this.ctlPlayPause.onclick(event);
+            if (this.popupQuality.style.opacity == 1) {
+                this.popupQuality.style.opacity = 0;
+            } else {
+                this.ctlPlayPause.onclick(event);
+            }
         }
         // 1. loadstart
         // 2. durationchange
@@ -336,7 +357,13 @@ class bvPlayer {
             }
         }
         this.ctlQuality.onclick = event => {
-
+            if (this.popupQuality.style.opacity == 0) {
+                this.popupQuality.style.visibility = 'visible';
+                this.popupQuality.style.opacity = 1;
+            } else {
+                this.popupQuality.style.visibility = 'collapse';
+                this.popupQuality.style.opacity = 0;
+            }
         }
         this.ctlHelp.onclick = event => {
             if (this.popup.hasAttribute('hidden')) {
@@ -400,8 +427,84 @@ class bvPlayer {
                 this.video.currentTime = this.video.duration * m;
             } //else console.info("key up " + event.keyCode);
         }
+
+        this._fillQualiteList();
+
+        this.player.querySelectorAll('.bv-menu li').forEach((element, key, arr) => {
+            element.onclick = event => {
+
+                // Убираем галки
+
+                this.popupQuality.querySelectorAll('ul .bv-menu-item-icon').forEach((element, key, arr) => {
+                    element.classList.add('bv-hide');
+                });
+
+                // Ставил новую галку
+
+                event.currentTarget.querySelector('.bv-menu-item-icon').classList.remove('bv-hide');
+
+                // Устанавливает источник
+
+                const quality = parseInt(event.currentTarget.getAttribute('quality'));
+                const curTime = this.video.currentTime;
+                this._setSource(quality);
+                this.video.currentTime = curTime;
+            }
+        });
     }
-    
+
+    /**
+     * Устанавливает качество как текущее.
+     * @param {number} quality
+     */
+    _setSource(quality) {
+        this.video.currentQuality = quality;
+        this.video.src = this.video.querySelector(`quality[width='${quality}']`).getAttribute('src');
+    }
+
+    /**
+     * Заполняет список качества видео, и установаливает самое низкое по умолчанию.
+     */
+    _fillQualiteList() {
+
+        let qualities = [];
+        this.video.querySelectorAll('quality').forEach((element, key, arr) => {
+            const width = parseInt(element.getAttribute('width'));
+            qualities.push(width);
+        })
+
+        qualities.sort((a, b) => {
+            if (a === b) {
+                return 0;
+            } else {
+                return a <= b ? -1 : +1;
+            }
+        });
+
+        const min_quality = qualities[0];
+        this._setSource(min_quality);
+
+        const list = this.popupQuality.querySelector('ul');
+        list.innerHTML = "";
+
+        for (let i = 0; i < qualities.length; i++) {
+
+            const width = qualities[i];
+            const hide = qualities[i] === this.video.currentQuality ? '' : 'bv-hide';
+
+            const newItem = `<li quality="${width}">
+                               <div class="bv-menu-item-icon ${hide}">
+                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172">
+                                   <path d="M145.43294,37.93294l-80.93294,80.93295l-30.76628,-30.76628l-10.13411,10.13411l40.90039,40.90039l91.06706,-91.06705z"></path>
+                                 </svg>
+                               </div>
+                               <div class="bv-menu-item-body">${width}p</div>
+                             </li>`;
+
+            list.insertAdjacentHTML('afterbegin', newItem);
+        }
+    }
+
     /**
      * Показывает на время элемент '.bv-hint'.
      */

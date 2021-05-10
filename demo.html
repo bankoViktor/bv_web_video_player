@@ -110,24 +110,18 @@
         </div>
       </div>
       <!-- POPUPE SETTINGS -->
-      <!--<div class="bv-menu">
+      <div class="bv-menu">
         <ul>
-          <li>
-            <div class="bv-menu-item-icon">1</div>-->
-      <!--<div class="bv-menu-item">
-        <div class="bv-menu-item-icon"></div>
-        <div class="bv-menu-item-body">1080p</div>
-      </div>-->
-      <!--</li>
-      <li>
-        <div class="bv-menu-item-icon">2</div>-->
-      <!--<div class="bv-menu-item">
-        <div class="bv-menu-item-icon"></div>
-        <div class="bv-menu-item-body">1080p</div>
-      </div>-->
-      <!--</li>
+          <li quality="1080">
+            <div class="bv-menu-item-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172">
+                <path d="M145.43294,37.93294l-80.93294,80.93295l-30.76628,-30.76628l-10.13411,10.13411l40.90039,40.90039l91.06706,-91.06705z"></path>
+              </svg>
+            </div>
+            <div class="bv-menu-item-body">1080p</div>
+          </li>
         </ul>
-      </div>-->
+      </div>
       <!-- BODY -->
       <div class="bv-panel-top">
         <div class="bv-panel-wrapper">
@@ -230,11 +224,14 @@
         </div>
       </div>
       <!-- VIDEO -->
-      <video muted autoplay loop>
+      <video muted autoplay loop type="video/mp4" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4">
         Your browser does not support HTML5 video.
         <br>
         Ваш браузер не поддерживат HTML5 видео.
-        <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+        <quality width="1080" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4" />
+        <quality width="480" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4" />
+        <quality width="360" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" />
+        <quality width="240" src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4" />
       </video>
     </div>
   </div>

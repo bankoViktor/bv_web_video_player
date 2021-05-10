@@ -300,10 +300,18 @@
 /* POPUP MENU */
 
 .bv-menu {
+    position: absolute;
+    right: 10px;
+    bottom: 60px;
     width: 250px;
-    background-color: rgba(80, 80, 80, 0.8);
-    margin: 0 0 5px auto;
-    border-radius: 3px;
+    background-color: rgba(28,28,28,0.9);
+    color: rgb(238, 238, 238);
+    border-radius: 2px;
+    z-index: 3001;
+    visibility: collapse;
+    opacity: 0;
+    transition: .3s opacity, .3s visibility;
+    text-shadow: 0 0 2px rgb(0, 0, 0, 0.5);
 }
 
     .bv-menu ul {
@@ -313,16 +321,34 @@
     }
 
     .bv-menu li {
-        height: 35px;
+        display: block;
+        height: 40px;
+        cursor: pointer;
     }
 
         .bv-menu li:hover {
-            background-color: rgba(255, 255, 255, 0.3);
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
-        .bv-menu li:active {
-            background-color: rgba(255, 255, 255, 0.4);
-        }
+.bv-menu-item-icon {
+    float: left;
+    width: 30px;
+    padding: 10px;
+}
+
+    .bv-menu-item-icon svg {
+        fill: rgb(238, 238, 238);
+        width: 16px;
+    }
+
+.bv-menu-item-body {
+    padding: 10px 0;
+    height: 100%;
+}
+
+.bv-hide {
+    visibility: hidden;
+}
 
 /* CURSOR TIME CODE */
 
