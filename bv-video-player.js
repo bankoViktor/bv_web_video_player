@@ -163,10 +163,12 @@ class bvPlayer {
                 bvPlayer._changeButtonState(this.ctlFullSrc, "Во весь экран (F)", svg_fullscr_enter);
             }
         }
-        this.player.ondblclick  = event => {
-            this.ctlFullSrc.click();
+        this.player.ondblclick = event => {
+            if (event.target === this.video) {
+                this.ctlFullSrc.click();
+            }
         }
-        
+
         // Video
         this.video.ontimeupdate = event => {
             this.timeCurrent.innerText = bvPlayer.dur2str(event.target.currentTime);
