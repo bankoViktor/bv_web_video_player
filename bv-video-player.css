@@ -70,18 +70,20 @@
         transform: translateY(0);
         cursor: pointer;
     }
-
-.bv-progress-bar-pos {
+    
+.bv-progress-bar-pos, 
+.bv-progress-bar-cursor {
     position: absolute;
     height: 100%;
+    width: 0%;
+}
+
+.bv-progress-bar-pos {
     background-color: var(--bv_progress_time_color);
 }
 
 .bv-progress-bar-cursor {
-    position: absolute;
-    height: 100%;
     background-color: var(--bv_progress_cursor_color);
-    width: 0%;
 }
 
 /* SEGMENTS */
