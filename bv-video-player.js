@@ -7,12 +7,12 @@
  *
  */
 
-
 // TODO кнопка "С начала" или "Повторить" при завершении видео
 // TODO пропадание контролов при воспроизведении и не двжении мыши
 // TODO выбор качества видео
 // TODO высота контейнера прогресса бара (без прыжков при наведении мыши)
-
+// TODO иконки в html, менять hidden или visibility
+// TODO всплывающая подсказка далее/назад 5сек, плей/стоп
 
 /**
  * Горячие клавишы:
@@ -85,6 +85,10 @@ class bvPlayer {
         return result;
     }
 
+    /**
+     * Устанавливает громкость.
+     * @param {number} параметр события
+     */
     _setVolume(event) {
         let x = event.offsetX;
 
@@ -149,7 +153,7 @@ class bvPlayer {
         this.popup = this.player.querySelector(".bv-popup");
         this.ctlPopupClose = this.player.querySelector(".bv-popup-footer button");
         this.timeCode = this.player.querySelector(".bv-timecode");
-        this.volumeHint = this.player.querySelector(".bv-volume");
+        this.hint = this.player.querySelector(".bv-hint");
 
         // Player root
         this.player.onfullscreenchange = event => {
@@ -159,7 +163,10 @@ class bvPlayer {
                 bvPlayer._changeButtonState(this.ctlFullSrc, "Во весь экран (F)", svg_fullscr_enter);
             }
         }
-
+        this.player.ondblclick  = event => {
+            this.ctlFullSrc.click();
+        }
+        
         // Video
         this.video.ontimeupdate = event => {
             this.timeCurrent.innerText = bvPlayer.dur2str(event.target.currentTime);
@@ -183,17 +190,6 @@ class bvPlayer {
             }
 
             this.volumeFill.style.width = this.video.volume * 100 + '%';
-
-            this.volumeHint.innerText = Math.round(this.video.volume * 100) + '%'
-
-            this.volumeHint.style.opacity = 1;
-            if (this.volumeHintTimerId > 0) {
-                clearTimeout(this.volumeHintTimerId);
-                this.volumeHintTimerId == 0;
-            }
-            this.volumeHintTimerId = setTimeout(() => {
-                this.volumeHint.style.opacity = 0;
-            }, 1000);
         }
         if (this.video.muted) {
             bvPlayer._changeButtonState(this.ctlMute, "Отключение звука (М)", svg_sound_mute);
@@ -380,16 +376,21 @@ class bvPlayer {
                     this.video.muted = false;
                     this.video.volume = 1;
                 }
+                const svg = this.video.muted ? svg_sound_mute : svg_sound_max;
+                this.hint.innerHTML = svg;
+                this._showHint();
             } else if (event.keyCode == KeyEvent.DOM_VK_UP) {
                 this.video.volume = Math.min(Math.floor(this.video.volume * 100) / 100 + this.volumeStep, 1);
                 if (this.video.muted) {
                     this.video.muted = false;
                 }
+                this._showVolumeHint();
             } else if (event.keyCode == KeyEvent.DOM_VK_DOWN) {
                 this.video.volume = Math.max(Math.floor(this.video.volume * 100) / 100 - this.volumeStep, 0);
                 if (this.video.muted) {
                     this.video.muted = false;
                 }
+                this._showVolumeHint();
             } else if (event.keyCode >= KeyEvent.DOM_VK_0 && event.keyCode <= KeyEvent.DOM_VK_9 ||
                 event.keyCode >= KeyEvent.DOM_VK_NUMPAD0 && event.keyCode <= KeyEvent.DOM_VK_NUMPAD9) {
                 const base = event.keyCode < 96 ? 48 : 96;
@@ -398,7 +399,31 @@ class bvPlayer {
             } //else console.info("key up " + event.keyCode);
         }
     }
-
+    
+    /**
+     * Показывает на время элемент '.bv-hint'.
+     */
+    _showHint() {
+        this.hint.style.opacity = 1;
+        
+        if (this.hintTimerId > 0) {
+            clearTimeout(this.hintTimerId);
+            this.hintTimerId == 0;
+        }
+        
+        this.hintTimerId = setTimeout(() => {
+            this.hint.style.opacity = 0;
+        }, 500);
+    }
+        
+    /**
+     * Показывает на время величину громкости.
+     */ 
+    _showVolumeHint() {
+        this.hint.innerHTML = `<span>${Math.round(this.video.volume * 100)}%</span>`;
+        this._showHint();
+    }
+       
     /**
     * Скрывает и отключает кнопки управления скорости воспроизведения.
     */
@@ -450,6 +475,7 @@ const svg_pip_enter = "<svg viewBox='0 0 36 36'><path d='M25,17 L17,17 L17,23 L2
 const svg_pip_leave = "<svg viewBox='0 0 36 36'><path d='M11,13 V23 H25 V13 z M29,25 L29,10.98 C29,9.88 28.1,9 27,9 L9,9 C7.9,9 7,9.88 7,10.98 L7,25 C7,26.1 7.9,27 9,27 L27,27 C28.1,27 29,26.1 29,25 L29,25 z M27,25.02 L9,25.02 L9,10.97 L27,10.97 L27,25.02 L27,25.02 z'/></svg>";
 const svg_fullscr_enter = "<svg viewBox='0 0 36 36'><path d='m 10,16 2,0 0,-4 4,0 0,-2 L 10,10 l 0,6 0,0 z'/><path d='m 20,10 0,2 4,0 0,4 2,0 L 26,10 l -6,0 0,0 z' /><path d='m 24,24 -4,0 0,2 L 26,26 l 0,-6 -2,0 0,4 0,0 z'/><path d='M 12,20 10,20 10,26 l 6,0 0,-2 -4,0 0,-4 0,0 z'/></svg>";
 const svg_fullscr_leave = "<svg viewBox='0 0 36 36'><path d='m 14,14 -4,0 0,2 6,0 0,-6 -2,0 0,4 0,0 z'/><path d='m 22,14 0,-4 -2,0 0,6 6,0 0,-2 -4,0 0,0 z'/><path d='m 20,26 2,0 0,-4 4,0 0,-2 -6,0 0,6 0,0 z'/><path d='m 10,22 4,0 0,4 2,0 0,-6 -6,0 0,2 0,0 z'/></svg>";
+
 
 // Keys
 if (typeof KeyEvent == "undefined") {
