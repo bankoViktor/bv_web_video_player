@@ -38,9 +38,9 @@ class bvPlayer {
 
     /**
      * Меняет состояние кнопки.
-     * @param {any} element Элемент контролла.
-     * @param {any} title Новый текст всплывающей подсказки.
-     * @param {any} innerHTML Новое содержимое (SVG иконка).
+     * @param {Element} element Элемент контролла.
+     * @param {string} title Новый текст всплывающей подсказки.
+     * @param {string} innerHTML Новое содержимое (SVG иконка).
      */
     static _changeButtonState(element, title, innerHTML) {
         element.innerHTML = innerHTML;
@@ -49,8 +49,8 @@ class bvPlayer {
 
     /**
      * Устанавливает скорость воспроизведения из набора по индексу.
-     * @param {any} video Элемен проигрывателя.
-     * @param {any} speedIndex Индекс скорости воспроизведния из набора.
+     * @param {Element} video Элемент проигрывателя.
+     * @param {number} speedIndex Индекс скорости воспроизведния из набора.
      */
     _setPlaySpeed(video, speedIndex) {
         this.playSpeedCur = speedIndex;
@@ -88,7 +88,7 @@ class bvPlayer {
 
     /**
      * Устанавливает громкость.
-     * @param {number} параметр события
+     * @param {Event} event события
      */
     _setVolume(event) {
         let x = event.offsetX;
