@@ -399,9 +399,6 @@ class bvPlayer {
                     this.video.muted = false;
                     this.video.volume = 1;
                 }
-                const svg = this.video.muted ? svg_sound_mute : svg_sound_max;
-                this.hint.innerHTML = svg;
-                this._showHint();
             } else if (event.keyCode == KeyEvent.DOM_VK_UP) {
                 this.video.volume = Math.min(Math.floor(this.video.volume * 100) / 100 + this.volumeStep, 1);
                 if (this.video.muted) {
