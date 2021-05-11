@@ -2,18 +2,18 @@
  * Скин видео проигрывателя
  * 
  * Версия:      0.3
- * Автор:       Банько В.С. (bankviktor14@gmail.com)
+ * Автор:       Banko Viktor (bankviktor14@gmail.com)
  * Дата:        07.05.2021
  *
  */
 
-// TODO кнопка "С начала" или "Повторить" при завершении видео
+// TODO кнопка "С начала" при завершении видео
 // TODO пропадание контролов при воспроизведении и не двжении мыши
-// TODO выбор качества видео
-// TODO высота контейнера прогресса бара (без прыжков при наведении мыши)
-// TODO иконки в html, менять hidden или visibility
+// TODO всплывающая подсказка мутирования 0.5
 // TODO всплывающая подсказка далее/назад 5сек, плей/стоп
 // TODO ffmpeg Создание нескольких выходов https://trac.ffmpeg.org/wiki/Creating%20multiple%20outputs
+// TODO название видео в левом верхнем углу прлеера
+// TODO спинер при ожидании загрузки
 
 /**
  * Горячие клавишы:
@@ -32,10 +32,6 @@
 
 
 class bvPlayer {
-    addSource(source_url) {
-        this.video.insertAdjacentHTML("beforeend", `<source src="${source_url}" type="video/mp4">`);
-    }
-
     /**
      * Меняет состояние кнопки.
      * @param {Element} element Элемент контролла.
@@ -57,19 +53,19 @@ class bvPlayer {
         video.playbackRate = this.playSpeeds[speedIndex];
     }
 
-    ///**
-    // * Преобразует строку вида 'hh:mm:ss' в число.
-    // * @param {string} str
-    // */
-    //static #str2dur(str) {
-    //    const parts = str.split(":", 3).reverse();
-    //    const m = [1, 60, 3600];
-    //    let result = 0;
-    //    for (let i = 0; i < parts.length; i++) {
-    //        result += parseInt(parts[i]) * m[i];
-    //    }
-    //    return result;
-    //}
+    /**
+     * Преобразует строку вида 'hh:mm:ss' в число.
+     * @param {string} str
+     */
+    static str2dur(str) {
+        const parts = str.split(":", 3).reverse();
+        const m = [1, 60, 3600];
+        let result = 0;
+        for (let i = 0; i < parts.length; i++) {
+            result += parseInt(parts[i]) * m[i];
+        }
+        return result;
+    }
 
     /**
      * Преобразует число в строку вида 'hh:mm:ss'.
@@ -229,9 +225,7 @@ class bvPlayer {
             bvPlayer._changeButtonState(this.ctlPip, "Открыть мини проигрыватель (I)", svg_pip_enter);
         }
         this.video.onclick = event => {
-            if (this.popupQuality.style.opacity == 1) {
-                this.popupQuality.style.opacity = 0;
-            } else {
+            if (this.popupQuality.style.opacity != 1) {
                 this.ctlPlayPause.onclick(event);
             }
         }
