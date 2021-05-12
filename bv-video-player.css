@@ -271,7 +271,7 @@
 /* TIME INDICATORS */
 
 .bv-time-indicator {
-    font-size: 18px;
+    font-size: 1.1rem;
     font-weight: 400;
     display: inline-block;
     vertical-align: middle;
@@ -385,6 +385,7 @@
     padding: 2px 5px;
     position: relative;
     color: var(--bv_controls_color);
+    border-radius: 2px;
 }
 
 /* HINT */
