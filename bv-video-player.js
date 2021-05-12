@@ -152,6 +152,7 @@ class bvPlayer {
         this.timeCode = this.player.querySelector(".bv-timecode");
         this.hint = this.player.querySelector(".bv-hint");
         this.popupQuality = this.player.querySelector(".bv-menu");
+        this.floatIcon = this.player.querySelector('.bv-float-icon');
 
         // Player root
         this.player.onfullscreenchange = event => {
@@ -228,6 +229,7 @@ class bvPlayer {
             if (this.popupQuality.style.opacity != 1) {
                 this.ctlPlayPause.onclick(event);
             }
+            this._showPlayHint();
         }
         // 1. loadstart
         // 2. durationchange
@@ -377,11 +379,13 @@ class bvPlayer {
             } else if (event.keyCode == KeyEvent.DOM_VK_K) {
                 if (this.video.paused) {
                     this.ctlPlayPause.click();
+                    this._showPlayHint();
                 } else if (this.video.playbackRate != 1) {
                     this.video.playbackRate = 1;
                     this._setPlaySpeed(this.video, this.playSpeedDef);
                 } else {
                     this.ctlPlayPause.click();
+                    this._showPlayHint();
                 }
             } else if (event.keyCode == KeyEvent.DOM_VK_H || event.keyCode == KeyEvent.DOM_VK_LEFT) {
                 this.video.currentTime = Math.max(this.video.currentTime - this.moveTimeStep, 0);
@@ -442,6 +446,12 @@ class bvPlayer {
                 this.video.currentTime = curTime;
             }
         });
+    }
+
+    _showPlayHint() {
+        this.floatIcon.innerHTML = this.ctlPlayPause.innerHTML;
+
+        
     }
 
     /**

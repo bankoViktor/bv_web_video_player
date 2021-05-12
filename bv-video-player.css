@@ -415,6 +415,30 @@
         width: 100px;
     }
 
+/* FLOAT ICON */
+
+.bv-float-icon {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.2);
+    fill: white;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    opacity: 0;
+    transition: 0.5s linear;
+}
+
+/*.bv-float-icon-hide {
+    transition: 1.5s linear;
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    opacity: 0;
+}*/
+
 /* DEBUG OUTPUT */
 
 .bv-debug-out {
