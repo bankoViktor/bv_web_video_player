@@ -98,6 +98,7 @@
 
 .bv-progress-bar-pos {
     background-color: var(--bv_progress_time_color);
+    transition: width 0.3s linear;
 }
 
 .bv-progress-bar-cursor {
