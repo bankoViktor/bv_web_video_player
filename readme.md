@@ -84,4 +84,4 @@ Banko Viktor - [bankoViktor](https://github.com/bankoViktor) - bankviktor14@gmai
 [license-url]: https://github.com/bankoViktor/bv_web_video_player/blob/master/LICENSE.txt
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/bankoViktor
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: screenshot.png
