@@ -123,30 +123,28 @@ class bvPlayer {
         this.volumeStep = 0.1;
 
         // elements
-        this.player = document.querySelector(`div#${root_player_id}`); // bv_player
-        this.video = this.player.querySelector("video"); // bv_video
-        this.progressBarTrack = this.player.querySelector(".bv-progress-bar-track"); // bv_progress_bar_track
-        this.progressBarPos = this.player.querySelector(".bv-progress-bar-pos"); // bv_progress_bar_pos
-        this.progressBarCursor = this.player.querySelector(".bv-progress-bar-cursor"); // bv_progress_bar_cursor
-        this.ctlPlayPause = this.player.querySelector("#bv_ctl_play_pause");  // bv_ctl_play_pause
-        this.ctlMute = this.player.querySelector("#bv_ctl_mute"); // bv_ctl_mute
+        this.player = document.querySelector(`div#${root_player_id}`); 
+        this.video = this.player.querySelector("video");
+        this.progressBarTrack = this.player.querySelector(".bv-progress-bar-track");
+        this.progressBarPos = this.player.querySelector(".bv-progress-bar-pos");
+        this.progressBarCursor = this.player.querySelector(".bv-progress-bar-cursor");
+        this.ctlPlayPause = this.player.querySelector("#bv_ctl_play_pause"); 
+        this.ctlMute = this.player.querySelector("#bv_ctl_mute"); 
         this.volumeSlider = this.player.querySelector(".bv-volume-slider");
         this.volumeSliderWrapper = this.player.querySelector(".bv-volume-slider-wrapper");
         this.volumeSliderThumb = this.player.querySelector(".bv-volume-slider-thumb");
         this.volumeFill = this.player.querySelector(".bv-volume-slider-fill");
-        this.ctlSlower = this.player.querySelector("#bv_ctl_slower"); // bv_ctl_slower
-        this.ctlSpeedIndicator = this.player.querySelector(".bv-ctl-speed-indicator"); // bv_ctl_speed_indicator
-        this.ctlSpeedIndicatorContent = this.player.querySelector(".bv-ctl-speed-indicator-content"); // bv_ctl_speed_indicator_content
-        this.ctlFaster = this.player.querySelector("#bv_ctl_faster"); // bv_ctl_faster
-        this.ctlPip = this.player.querySelector("#bv_ctl_pip"); // bv_ctl_pip
-        this.ctlFullSrc = this.player.querySelector("#bv_ctl_fullsrc"); // bv_ctl_fullsrc
-        this.ctlQuality = this.player.querySelector("#bv_ctl_quality"); // bv_ctl_quality
-        this.ctlHelp = this.player.querySelector("#bv_ctl_help"); // bv_ctl_help
-        this.top = this.player.querySelector(".bv-top");// bv_top 
-        this.bottom = this.player.querySelector(".bv-bottom"); // bv_bottom
-        this.timeCurrent = this.player.querySelector(".bv-time-current"); // bv_time_current
-        this.timeDuration = this.player.querySelector(".bv-time-duration"); // bv_time_duration
-        this.bufferSegs = this.player.querySelector(".bv-buffer-segs"); // bv_buffer_segs
+        this.ctlSlower = this.player.querySelector("#bv_ctl_slower"); 
+        this.ctlSpeedIndicator = this.player.querySelector(".bv-ctl-speed-indicator"); 
+        this.ctlSpeedIndicatorContent = this.player.querySelector(".bv-ctl-speed-indicator-content"); 
+        this.ctlFaster = this.player.querySelector("#bv_ctl_faster"); 
+        this.ctlPip = this.player.querySelector("#bv_ctl_pip");
+        this.ctlFullSrc = this.player.querySelector("#bv_ctl_fullsrc"); 
+        this.ctlQuality = this.player.querySelector("#bv_ctl_quality"); 
+        this.ctlHelp = this.player.querySelector("#bv_ctl_help"); 
+        this.timeCurrent = this.player.querySelector(".bv-time-current"); 
+        this.timeDuration = this.player.querySelector(".bv-time-duration");
+        this.bufferSegs = this.player.querySelector(".bv-buffer-segs"); 
         this.popup = this.player.querySelector(".bv-popup");
         this.ctlPopupClose = this.player.querySelector(".bv-popup-footer button");
         this.timeCode = this.player.querySelector(".bv-timecode");
@@ -445,31 +443,26 @@ class bvPlayer {
 
         this.player.querySelectorAll('.bv-menu li').forEach((element, key, arr) => {
             element.onclick = event => {
+                const newQuality = parseInt(event.currentTarget.getAttribute('quality'));
+                if (newQuality == this.currentQuality) {
+                    return;
+                }
 
                 // Убираем галки
-
                 this.popupQuality.querySelectorAll('ul .bv-menu-item-icon').forEach((element, key, arr) => {
                     element.classList.add('bv-hide');
                 });
 
                 // Ставил новую галку
-
                 event.currentTarget.querySelector('.bv-menu-item-icon').classList.remove('bv-hide');
 
                 // Устанавливает источник
-
-                const quality = parseInt(event.currentTarget.getAttribute('quality'));
+                
                 const curTime = this.video.currentTime;
-                this._setSource(quality);
+                this._setSource(newQuality);
                 this.video.currentTime = curTime;
             }
         });
-    }
-
-    _showPlayHint() {
-        this.floatIcon.innerHTML = this.ctlPlayPause.innerHTML;
-
-        
     }
 
     /**
@@ -477,19 +470,22 @@ class bvPlayer {
      * @param {number} quality
      */
     _setSource(quality) {
-        this.video.currentQuality = quality;
-        this.video.src = this.video.querySelector(`quality[width='${quality}']`).getAttribute('src');
+        const isPaused = this.video.paused;
+        this.currentQuality = quality;
+        this.video.src = this.video.querySelector(`quality[height='${quality}']`).getAttribute('src');
+        if (!isPaused) {
+            this.video.play();
+        }
     }
 
     /**
      * Заполняет список качества видео, и установаливает самое низкое по умолчанию.
      */
     _fillQualiteList() {
-
         let qualities = [];
         this.video.querySelectorAll('quality').forEach((element, key, arr) => {
-            const width = parseInt(element.getAttribute('width'));
-            qualities.push(width);
+            const quality = parseInt(element.getAttribute('height'));
+            qualities.push(quality);
         })
 
         qualities.sort((a, b) => {
@@ -500,24 +496,23 @@ class bvPlayer {
             }
         });
 
-        const min_quality = qualities[0];
-        this._setSource(min_quality);
+        const max_quality = qualities[qualities.length - 1];
+        this._setSource(max_quality);
 
         const list = this.popupQuality.querySelector('ul');
         list.innerHTML = "";
 
         for (let i = 0; i < qualities.length; i++) {
 
-            const width = qualities[i];
-            const hide = qualities[i] === this.video.currentQuality ? '' : 'bv-hide';
+            const hide = qualities[i] === this.currentQuality ? '' : 'bv-hide';
 
-            const newItem = `<li quality="${width}">
+            const newItem = `<li quality="${qualities[i]}">
                                <div class="bv-menu-item-icon ${hide}">
                                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 172 172">
                                    <path d="M145.43294,37.93294l-80.93294,80.93295l-30.76628,-30.76628l-10.13411,10.13411l40.90039,40.90039l91.06706,-91.06705z"></path>
                                  </svg>
                                </div>
-                               <div class="bv-menu-item-body">${width}p</div>
+                               <div class="bv-menu-item-body">${ qualities[i]}p</div>
                              </li>`;
 
             list.insertAdjacentHTML('afterbegin', newItem);
@@ -546,34 +541,6 @@ class bvPlayer {
     _showVolumeHint() {
         this.hint.innerHTML = `<span>${Math.round(this.video.volume * 100)}%</span>`;
         this._showHint();
-    }
-       
-    /**
-    * Скрывает и отключает кнопки управления скорости воспроизведения.
-    */
-    hideSpeedControls() {
-        this.ctlSlower.setAttribute('disabled', '');
-        this.ctlSlower.setAttribute('hidden', '');
-
-        this.ctlSpeedIndicator.setAttribute('disabled', '');
-        this.ctlSpeedIndicator.setAttribute('hidden', '');
-
-        this.ctlFaster.setAttribute('disabled', '');
-        this.ctlFaster.setAttribute('hidden', '');
-    }
-
-    /**
-     * Показыват и включает кнопки управления скорости воспроизведения.
-     */
-    showSpeedControls() {
-        this.ctlSlower.removeAttribute('disabled');
-        this.ctlSlower.removeAttribute('hidden');
-
-        this.ctlSpeedIndicator.removeAttribute('disabled');
-        this.ctlSpeedIndicator.removeAttribute('hidden');
-
-        this.ctlFaster.removeAttribute('disabled');
-        this.ctlFaster.removeAttribute('hidden');
     }
 } 
 
