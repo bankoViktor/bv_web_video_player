@@ -211,13 +211,21 @@ class bvPlayer {
             bvPlayer._changeButtonState(this.ctlMute, "Отключение звука (М)", svg_sound_mute);
         }
         this.video.onratechange = event => {
-            this.ctlSlower.disabled = this.playSpeedCur <= 0;
-            this.ctlFaster.disabled = this.playSpeedCur >= this.playSpeeds.length - 1;
-            this.ctlSpeedIndicator.disabled = this.playSpeedCur == this.playSpeedDef;
-            this.ctlSpeedIndicatorContent.title = this.playSpeedCur == this.playSpeedDef ?
-                "Текущая скорость воспроизведения" :
-                "К нормальной скорости воспроизведения (K)";
-            this.ctlSpeedIndicatorContent.innerText = "x" + this.video.playbackRate;
+            if (this.ctlSlower != null) {
+                this.ctlSlower.disabled = this.playSpeedCur <= 0;
+            }
+            if (this.ctlFaster != null) {
+                this.ctlFaster.disabled = this.playSpeedCur >= this.playSpeeds.length - 1;
+            }
+            if (this.ctlSpeedIndicator != null) {
+                this.ctlSpeedIndicator.disabled = this.playSpeedCur == this.playSpeedDef;
+            }
+            if (this.ctlSpeedIndicatorContent != null) {
+                this.ctlSpeedIndicatorContent.title = this.playSpeedCur == this.playSpeedDef ?
+                    "Текущая скорость воспроизведения" :
+                    "К нормальной скорости воспроизведения (K)";
+                this.ctlSpeedIndicatorContent.innerText = "x" + this.video.playbackRate;
+            }
         }
         this.video.onenterpictureinpicture = event => {
             bvPlayer._changeButtonState(this.ctlPip, "Закрыть мини проигрыватель (I)", svg_pip_leave);
@@ -320,20 +328,26 @@ class bvPlayer {
                 this.video.volume = 1;
             }
         }
-        this.ctlSlower.onclick = event => {
-            event.target.blur();
-            if (!event.target.disabled) {
-                this._setPlaySpeed(this.video, this.playSpeedCur - 1);
+        if (this.ctlSlower != null) {
+            this.ctlSlower.onclick = event => {
+                event.target.blur();
+                if (!event.target.disabled) {
+                    this._setPlaySpeed(this.video, this.playSpeedCur - 1);
+                }
             }
         }
-        this.ctlSpeedIndicator.onclick = event => {
-            event.target.blur();
-            this._setPlaySpeed(this.video, this.playSpeedDef);
+        if (this.ctlSpeedIndicator != null) {
+            this.ctlSpeedIndicator.onclick = event => {
+                event.target.blur();
+                this._setPlaySpeed(this.video, this.playSpeedDef);
+            }
         }
-        this.ctlFaster.onclick = event => {
-            event.target.blur();
-            if (!event.target.disabled) {
-                this._setPlaySpeed(this.video, this.playSpeedCur + 1);
+        if (this.ctlFaster != null) {
+            this.ctlFaster.onclick = event => {
+                event.target.blur();
+                if (!event.target.disabled) {
+                    this._setPlaySpeed(this.video, this.playSpeedCur + 1);
+                }
             }
         }
         this.ctlPip.onclick = event => {
@@ -394,9 +408,13 @@ class bvPlayer {
             } else if (event.keyCode == KeyEvent.DOM_VK_I) {
                 this.ctlPip.click();
             } else if (event.keyCode == KeyEvent.DOM_VK_J) {
-                this.ctlSlower.click();
+                if (this.ctlSlower != null) {
+                    this.ctlSlower.click();
+                }
             } else if (event.keyCode == KeyEvent.DOM_VK_L) {
-                this.ctlFaster.click();
+                if (this.ctlFaster != null) {
+                    this.ctlFaster.click();
+                }
             } else if (event.keyCode == KeyEvent.DOM_VK_M) {
                 this.ctlMute.click();
                 if (this.video.volume == 0) {
